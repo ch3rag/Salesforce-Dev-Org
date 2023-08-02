@@ -46,8 +46,6 @@ $RECYCLE.BIN/
 
 # Additional Files & Folders
 .vs
-.vscode
-
 # VS Code Specific Settings
 # .vscode/*
 # !.vscode/settings.json
