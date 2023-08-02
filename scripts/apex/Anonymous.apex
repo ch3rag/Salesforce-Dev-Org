@@ -1,1 +1,2 @@
 TestClass.main();
+TestClass.main();
