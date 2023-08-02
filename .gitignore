@@ -43,3 +43,12 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+
+# Additional Files & Folders
+.vs
+.vscode
+
+# VS Code Specific Settings
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/launch.json
