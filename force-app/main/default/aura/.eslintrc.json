@@ -5,7 +5,13 @@
         "vars-on-top": "off",
         "no-unused-expressions": "off",
         "semi": "error",
-        "func-names": "off"
+        "func-names": "off",
+        "no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "component|event|helper"
+            }
+        ]
     },
     "env": {
         "es6": true

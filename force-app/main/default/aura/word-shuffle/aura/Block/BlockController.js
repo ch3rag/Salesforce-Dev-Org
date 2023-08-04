@@ -1,18 +1,20 @@
 ({
-	onClickHandler: function(component, event, helper) {
-		const open = component.get('v.open');
-		if (!open) {
-			component.set('v.open', true);
-			const label = component.get('v.label');
-			let componentEvent = component.getEvent('onclick');
-			componentEvent.setParams({
-				value: label
-			});
-			componentEvent.fire();
-		}
-	},
+    'onClickHandler': function (component, event, helper) {
+        const open = component.get('v.open');
 
-	afterScriptsLoaded: function(component, event, helper) {
-		fitText(component.getElement('.board-block'));
-	}
+        if (!open) {
+            component.set('v.open', true);
+            const label = component.get('v.label');
+            let componentEvent = component.getEvent('onclick');
+
+            componentEvent.setParams({
+                'value': label
+            });
+            componentEvent.fire();
+        }
+    },
+
+    'afterScriptsLoaded': function (component, event, helper) {
+        window.fitText(component.getElement('.board-block'));
+    }
 });
