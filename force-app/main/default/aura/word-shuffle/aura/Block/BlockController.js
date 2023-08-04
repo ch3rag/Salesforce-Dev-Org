@@ -14,7 +14,7 @@
         }
     },
 
-    'afterScriptsLoaded': function (component, event, helpers) {
+    'afterScriptsLoaded': function (component, event, helper) {
         window.fitText(component.getElement('.board-block'));
     }
 });
