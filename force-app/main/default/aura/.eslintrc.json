@@ -9,7 +9,7 @@
         "no-unused-vars": [
             "error",
             {
-                "argsIgnorePattern": "component|event|helper"
+                "argsIgnorePattern": "^component$|^event$|^helper$"
             }
         ]
     },
