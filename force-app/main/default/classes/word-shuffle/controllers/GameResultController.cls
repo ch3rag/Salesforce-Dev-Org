@@ -1,12 +1,14 @@
-public with sharing class GameResultController{
+public with sharing class GameResultController {
     @AuraEnabled
-    public static List<Word_Shuffle__c> getResults(){
+    public static List<Word_Shuffle__c> getResults() {
         String userId = UserInfo.getUserId();
-        List<Word_Shuffle__c> results = [SELECT Id, Name, Result__c, Mode__c, CreatedDate
-                                         FROM Word_Shuffle__c
-                                         WHERE CreatedById = :userId
-                                         WITH SECURITY_ENFORCED
-                                         ORDER BY CreatedDate DESC];
+        List<Word_Shuffle__c> results = [
+            SELECT Id, Name, Result__c, Mode__c, CreatedDate
+            FROM Word_Shuffle__c
+            WHERE CreatedById = :userId
+            WITH SECURITY_ENFORCED
+            ORDER BY CreatedDate DESC
+        ];
         return results;
     }
 }

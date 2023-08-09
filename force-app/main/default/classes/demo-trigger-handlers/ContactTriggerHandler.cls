@@ -7,7 +7,7 @@ public with sharing class ContactTriggerHandler {
                 accountIds.add(contact.AccountId);
             }
         }
-        
+
         AccountContactService.updateActiveContacts(accountIds);
     }
 
@@ -17,7 +17,7 @@ public with sharing class ContactTriggerHandler {
         for (Contact contact : newRecords) {
             String oldAccountId = oldMap.get(contact.Id).AccountId;
             String newAccountId = contact.AccountId;
-            Boolean isActiveOld =  oldMap.get(contact.Id).Active__c;
+            Boolean isActiveOld = oldMap.get(contact.Id).Active__c;
             Boolean isActiveNew = contact.Active__c;
 
             if (isActiveOld != isActiveNew || newAccountId != oldAccountId) {
@@ -53,7 +53,7 @@ public with sharing class ContactTriggerHandler {
                 accountIds.add(contact.AccountId);
             }
         }
-        
+
         AccountContactService.updateActiveContacts(accountIds);
     }
 }

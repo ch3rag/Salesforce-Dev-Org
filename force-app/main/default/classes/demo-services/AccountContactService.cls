@@ -1,10 +1,12 @@
 public with sharing class AccountContactService {
     public static void updateActiveContacts(Set<Id> accountIds) {
-        List<AggregateResult> results = [SELECT AccountId, COUNT(Id) totalContacts
-                                         FROM Contact
-                                         WHERE AccountId IN :accountIds AND Active__c = TRUE
-                                         WITH SECURITY_ENFORCED
-                                         GROUP BY AccountId];
+        List<AggregateResult> results = [
+            SELECT AccountId, COUNT(Id) totalContacts
+            FROM Contact
+            WHERE AccountId IN :accountIds AND Active__c = TRUE
+            WITH SECURITY_ENFORCED
+            GROUP BY AccountId
+        ];
         List<Account> accounts = new List<Account>();
 
         for (AggregateResult result : results) {
