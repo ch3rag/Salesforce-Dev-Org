@@ -1,17 +1,17 @@
 public with sharing class AccountController {
 
 	public static List<Account> insertAccounts(List<Account> accounts) {
-		insert accounts;
+		insert as user accounts;
 		return accounts;
 	}
 	
 	public static Account insertAccount(Account account) {
-		insert account;
+		insert as user account;
 		return account;
 	}
 	
 	public static List<Account> getAllAccounts() {
-		List<Account> accounts = [SELECT Name, Phone FROM Account];
+		List<Account> accounts = [SELECT Name, Phone FROM Account WITH SECURITY_ENFORCED];
 		return accounts;
 	}
 	
@@ -30,7 +30,10 @@ public with sharing class AccountController {
 	public static void updateAvgCaseResolutionDays(List<Id> accountIds) {
 		
 		// Get All Accounts And Associated Cases Using Parent Child Relationship Query
-		List<Account> accounts = [SELECT Id, (SELECT CreatedDate, ClosedDate FROM Cases WHERE IsClosed = true) FROM Account WHERE Id IN :accountIds AND Id IN (SELECT AccountId FROM Case)];
+		List<Account> accounts = [SELECT Id, (SELECT CreatedDate, ClosedDate FROM Cases WHERE IsClosed = true)
+								  FROM Account
+								  WHERE Id IN :accountIds AND Id IN (SELECT AccountId FROM Case)
+								  WITH SECURITY_ENFORCED];
 		// For Each Account
 		for (Account account : accounts) {
 			Integer totalCases = 0;
@@ -49,8 +52,6 @@ public with sharing class AccountController {
 			account.Avg_Case_Resolution_Days__c = resolutionDays;
 		}
 		// Commit The Changes In Database
-		if (Account.getSObjectType().getDescribe().isUpdateable()) {
-			update accounts;
-		}
+		update as user accounts;
 	}
 }

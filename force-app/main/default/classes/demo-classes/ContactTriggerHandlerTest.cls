@@ -6,7 +6,7 @@ public with sharing class ContactTriggerHandlerTest {
 			new Account(Name = 'Test Account - 1'),
 			new Account(Name = 'Test Account - 2')
 		};
-		insert testAccounts;
+		insert as user testAccounts;
 		
 		List<Contact> testContacts = new List<Contact> {
 			new Contact(LastName = 'Test Contact - 1', AccountId = testAccounts[0].Id, Active__c = true),
@@ -16,13 +16,13 @@ public with sharing class ContactTriggerHandlerTest {
 			new Contact(LastName = 'Test Contact - 5', AccountId = testAccounts[1].Id),
 			new Contact(LastName = 'Test Contact - 6', AccountId = testAccounts[1].Id)
 		};
-		insert testContacts;
+		insert as user testContacts;
 	}
 
 
 	@IsTest
 	public static void afterInsertTest() {
-		List<Account> accounts = [SELECT Id, Name, Active_Contacts__c FROM Account];
+		List<Account> accounts = [SELECT Id, Name, Active_Contacts__c FROM Account WITH SECURITY_ENFORCED];
  
 		System.assertEquals(2, accounts.size(), 'Account size must be 2.');
 		
@@ -36,7 +36,7 @@ public with sharing class ContactTriggerHandlerTest {
 			}
 		}
 
-		List<Contact> contacts = [SELECT Id, Name FROM Contact];
+		List<Contact> contacts = [SELECT Id, Name FROM Contact WITH SECURITY_ENFORCED];
 		System.assertEquals(6, contacts.size(), 'Contact size must be 6.');
 	}
 }
