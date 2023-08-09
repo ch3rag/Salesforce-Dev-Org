@@ -17,5 +17,7 @@
   "tabWidth": 4,
   "quoteProps": "preserve",
   "singleQuote": true,
-  "semi": true
+  "semi": true,
+  "endOfLine": "lf",
+  "printWidth": 120
 }

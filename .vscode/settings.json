@@ -16,5 +16,9 @@
 	"ltng",
 	"precommit",
 	"sfdx"
-]
+],
+"editor.formatOnSave": false,
+"editor.formatOnType": false,
+"diffEditor.codeLens": true,
+"editor.minimap.autohide": true
 }
