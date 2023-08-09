@@ -49,7 +49,6 @@ public with sharing class CTPersonController {
 			Integer count = (Integer)result.get('NumPeople');
 			mapping.put(status, count);
 		}
-
 		return mapping;
 	}
 

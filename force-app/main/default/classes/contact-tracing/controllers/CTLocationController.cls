@@ -25,8 +25,8 @@ public with sharing class CTLocationController {
 	// Search A Location By It's Id
 	public static Location__c getLocationById(String locationId) {
 		List<Location__c> locations = [SELECT Id, Name, Address__c, Pincode__c, Red_Score__c, Status__c, Status_Update_Date__c
-									FROM Location__c
-									WHERE Id = :locationId];
+									   FROM Location__c
+									   WHERE Id = :locationId];
 		return (locations != null && locations.size() > 0)? locations[0] : null;
 	}
 

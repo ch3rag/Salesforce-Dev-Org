@@ -1,0 +1,40 @@
+<aura:component implements="force:appHostable">
+    <aura:attribute name="headerTitle" type="String" default="Person View"></aura:attribute>
+    <aura:attribute name="scope" type="String" default="person"></aura:attribute>
+
+    <div class="container">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem size="12">
+                <c:CTHealthHeader
+                    headerTitle="{!v.headerTitle}"
+                    scope="{!v.scope}"
+                    aura:id="health-header"
+                ></c:CTHealthHeader>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12">
+                <lightning:tabset variant="vertical" onselect="{!c.tabSelectHandler}">
+                    <lightning:tab label="Person View" id="person">
+                        <lightning:layout>
+                            <lightning:layoutItem size="8" padding="horizontal-small">
+                                <c:CTRecentChanges scope="person"></c:CTRecentChanges>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="4" padding="horizontal-small">
+                                <c:CTPersonView></c:CTPersonView>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                    <lightning:tab label="Location View" id="location">
+                        <lightning:layout>
+                            <lightning:layoutItem size="8" padding="horizontal-small">
+                                <c:CTRecentChanges scope="location"></c:CTRecentChanges>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="4" padding="horizontal-small">
+                                <c:CTLocationView></c:CTLocationView>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:tab>
+                </lightning:tabset>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

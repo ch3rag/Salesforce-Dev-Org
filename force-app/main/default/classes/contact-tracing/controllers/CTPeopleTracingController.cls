@@ -2,10 +2,11 @@
 
 public with sharing class CTPeopleTracingController {
 	// Returns A  List Of People Tracing Records Related To A PersonId
-	public List<People_Tracing__c> getTraces(String personId) {
+	public static List<People_Tracing__c> getTraces(String personId) {
 		List<People_Tracing__c> tracings = [SELECT Id, Person_1__c, Person_2__c, Contact_Date__c, Contact_Type__c, Person_1__r.Token__c, Person_1__r.Health_Status__C, Person_2__r.Token__c, Person_2__r.Health_Status__C
 											FROM People_Tracing__c
-											WHERE Person_1__c = :personId OR Person_2__c = :personId
+											WHERE (Person_1__c = :personId OR Person_2__c = :personId)
+												AND Contact_Date__c = LAST_N_DAYS:30
 											ORDER BY Contact_Date__c DESC];
 		return tracings;
 	}
