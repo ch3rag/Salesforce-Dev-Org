@@ -16,6 +16,7 @@
 	"flexipage",
 	"ltng",
 	"precommit",
+	"Queueable",
 	"sfdx"
 ],
 "editor.formatOnSave": false,
