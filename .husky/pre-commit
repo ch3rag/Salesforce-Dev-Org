@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Disable lint-staged Git Hook
 # npm run precommit

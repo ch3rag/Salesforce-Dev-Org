@@ -1,2 +1,5 @@
-Map<Id, Lead> leadRecords = new Map<Id, Lead>([SELECT Id FROM Lead]);
-LeadAsynchronous.updateLeadRecords(leadRecords.keySet());
+CTStatusUpdateSchedule updateSchedule = new CTStatusUpdateSchedule();
+
+Id jobId = System.schedule('Person/Location Status Update Job', CTStatusUpdateSchedule.CRON, updateSchedule);
+
+System.debug(jobId);

@@ -17,6 +17,7 @@
 	"ltng",
 	"precommit",
 	"Queueable",
+	"Schedulable",
 	"sfdx"
 ],
 "editor.formatOnSave": false,
