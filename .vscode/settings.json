@@ -1,27 +1,27 @@
 {
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/.sfdx": true
-},
-"salesforcedx-vscode-core.show-cli-success-msg": false,
-"cSpell.enableFiletypes": [
-	"apex",
-	"apex-anon"
-],
-"cSpell.words": [
-	"Batchable",
-	"Chirag",
-	"Createable",
-	"flexipage",
-	"ltng",
-	"precommit",
-	"Queueable",
-	"Schedulable",
-	"sfdx"
-],
-"editor.formatOnSave": false,
-"editor.formatOnType": false,
-"diffEditor.codeLens": true,
-"editor.minimap.autohide": true
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/.sfdx": true
+	},
+	"salesforcedx-vscode-core.show-cli-success-msg": false,
+	"cSpell.enableFiletypes": [
+		"apex",
+		"apex-anon"
+	],
+	"cSpell.words": [
+		"Batchable",
+		"Chirag",
+		"Createable",
+		"flexipage",
+		"ltng",
+		"precommit",
+		"Queueable",
+		"Schedulable",
+		"sfdx"
+	],
+	"editor.formatOnSave": false,
+	"editor.formatOnType": false,
+	"diffEditor.codeLens": true,
+	"editor.minimap.autohide": true
 }
