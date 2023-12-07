@@ -6,7 +6,7 @@ public with sharing class CTDataCleanupSchedule implements Schedulable {
         Database.executeBatch(peopleTracingCleanupBatch, 2000);
 
 
-		CTLocationTracingDataCleanupBatch locationTracingCleanupBatch = new CTLocationTracingDataCleanupBatch();
+        CTLocationTracingDataCleanupBatch locationTracingCleanupBatch = new CTLocationTracingDataCleanupBatch();
         Database.executeBatch(locationTracingCleanupBatch, 2000);
     }
 }
