@@ -1,0 +1,63 @@
+<aura:component implements="force:appHostable" controller="SearchWeatherController">
+    <!-- Attributes -->
+    <aura:attribute name="location" type="String" />
+    <aura:attribute name="resolvedAddress" type="String" default="No Location Searched!" />
+    <aura:attribute name="currentTemperature" type="String" default="" />
+    <!-- Header -->
+    <div class="slds-page-header slds-page-header_record-home">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-queue">
+                            <lightning:icon
+                                iconName="standard:search"
+                                alternativeText="Search Weather"
+                                class="slds-var-p-around_xx-small"
+                                title="Search Weather"
+                            />
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span>Salesforce Weather Application</span>
+                                    <span class="slds-page-header__title slds-truncate">Search Weather</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Card -->
+    <lightning:card>
+        <aura:set attribute="title">
+            <lightning:icon iconName="utility:location" size="small" />
+            <span class="slds-var-m-left_small">{!v.resolvedAddress}</span>
+            <span class="slds-var-m-left_small">{!v.currentTemperature}</span>
+        </aura:set>
+        <!-- Search Panel -->
+        <div class="search-panel slds-var-p-horizontal_medium">
+            <!-- Location Input Text Box -->
+            <lightning:input
+                type="text"
+                name="location"
+                label="Location"
+                variant="label-hidden"
+                value="{!v.location}"
+                placeholder="Type Location Name Here..."
+            />
+            <!-- Search Button -->
+            <lightning:button
+                label="Search Weather"
+                title="Search Weather"
+                onclick="{!c.weatherSearchHandler}"
+                variant="neutral"
+                class="slds-var-m-left_medium"
+            />
+        </div>
+    </lightning:card>
+</aura:component>

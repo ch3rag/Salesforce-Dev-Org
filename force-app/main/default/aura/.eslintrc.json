@@ -18,5 +18,6 @@
     },
     "parserOptions": {
         "ecmaVersion": "latest"
-    }
+    },
+    "indent": ["error", 4]
 }

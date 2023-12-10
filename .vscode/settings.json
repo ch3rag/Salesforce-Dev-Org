@@ -11,14 +11,17 @@
 	],
 	"cSpell.words": [
 		"Batchable",
+		"Callout",
 		"Chirag",
 		"Createable",
 		"flexipage",
+		"Hostable",
 		"ltng",
 		"precommit",
 		"Queueable",
 		"Schedulable",
-		"sfdx"
+		"sfdx",
+		"tabset"
 	],
 	"editor.formatOnSave": false,
 	"editor.formatOnType": false,

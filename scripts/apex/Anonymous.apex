@@ -1,6 +1,3 @@
-// Create Status Update Scheduled Jobs For Location And People
-CTStatusUpdateSchedule updateSchedule = new CTStatusUpdateSchedule();
-
-Id jobId = System.schedule('Person/Location Status Update Job', CTStatusUpdateSchedule.CRON, updateSchedule);
-
-System.debug(jobId);
+WeatherAPI api = new WeatherAPI();
+api.setLocation('Lucknow').makeAPIRequest().populateData();
+System.debug(api.getCurrentWeather());

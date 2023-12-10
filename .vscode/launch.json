@@ -12,5 +12,6 @@
       "stopOnEntry": true,
       "trace": true
     }
-  ]
+  ],
+  "console": "integratedTerminal"
 }

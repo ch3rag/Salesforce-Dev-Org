@@ -9,10 +9,10 @@
       "files": "*.{cmp,page,component}",
       "options": { "parser": "html" }
     },
-	{
-		"files": "*.css",
-		"options": { "parser": "css" }
-	}
+    {
+        "files": "*.css",
+        "options": { "parser": "css" }
+    }
   ],
   "tabWidth": 4,
   "quoteProps": "preserve",
