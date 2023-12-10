@@ -53,3 +53,6 @@ $RECYCLE.BIN/
 
 # PMD Cache
 .pmdCache
+
+# API KEYS
+API_Key.VisualCrossingWeatherAPIKey.md-meta.xml
