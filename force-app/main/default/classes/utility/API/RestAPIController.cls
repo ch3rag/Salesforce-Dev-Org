@@ -14,7 +14,6 @@ public with sharing abstract class RestAPIController {
     protected RestAPIController () {
         argAfterURLBeforeParams = '';
         requestParams = new Map<String, String>();
-        hasException = false;
     }
 
     protected RestAPIController setRequestURL(String url) {
@@ -52,9 +51,8 @@ public with sharing abstract class RestAPIController {
         Http http = new Http();
         try {
             httpResponse = http.send(httpRequest);
-            hasException = false;
-        } catch (System.CalloutException exception) {
-            throw exception;
+        } catch (System.CalloutException calloutException) {
+            throw calloutException;
         }
     }
 
@@ -88,9 +86,5 @@ public with sharing abstract class RestAPIController {
 
     public Map<String, Object> getResponseBodyAsJSON() {
         return (Map<String, Object>) JSON.deserializeUntyped(httpResponse.getBody());
-    }
-
-    public Boolean hasException() {
-        return hasException;
     }
 }

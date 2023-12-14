@@ -44,7 +44,7 @@ public with sharing class WeatherAPI extends RestAPIController {
     }
 
     public WeatherAPI populateData() {
-        if (!hasException() && getStatusCode() == HttpConstants.HTTP_SUCCESS_STATUS_CODE) {
+        if (getStatusCode() == HttpConstants.HTTP_SUCCESS_STATUS_CODE) {
             Map<String, Object> data = getResponseBodyAsJSON();
             Map<String, Object> currentConditions = (Map<String, Object>) data.get(CURRENT_CONDITIONS);
             currentTemperature = (Decimal)currentConditions.get(TEMP);
