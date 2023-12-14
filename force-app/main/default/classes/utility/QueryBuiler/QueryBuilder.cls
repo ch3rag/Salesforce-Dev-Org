@@ -1,5 +1,4 @@
 public with sharing class QueryBuilder {
-
     private String sObjectName;
     private Set<String> selectedFields;
     private Set<String> groupFields;
