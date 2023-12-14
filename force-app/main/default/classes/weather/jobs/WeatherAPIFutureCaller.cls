@@ -1,5 +1,4 @@
 public with sharing class WeatherAPIFutureCaller {
-
     @Future(Callout = true)
     public static void calloutAPI() {
         WeatherAPI api = new WeatherAPI();
@@ -8,7 +7,6 @@ public with sharing class WeatherAPIFutureCaller {
         history.Location__c = api.resolvedAddress;
         history.Temperature__c = api.currentTemperature;
         history.Timestamp__c = DateTime.now();
-        WeatherHistoryController.insertWeatherHistory(history);
+        WeatherHistoryRepository.insertWeatherHistory(history);
     }
-
 }
