@@ -1,6 +1,6 @@
 <aura:component implements="force:appHostable" controller="SearchWeatherController">
     <!-- Attributes -->
-    <aura:attribute name="location" type="String" default="Lucknow, UP, India"/>
+    <aura:attribute name="location" type="String" default="Lucknow, UP, India" />
     <aura:attribute name="weatherInformation" type="Object" />
     <aura:attribute name="selectedItem" type="String" default="searchWeather" />
     <aura:attribute name="weatherData" type="Object" />
@@ -13,10 +13,7 @@
     <div class="container">
         <lightning:layout>
             <lightning:layoutItem>
-                <lightning:verticalNavigation
-                    selectedItem="{!v.selectedItem}"
-                    class="navigation"
-                >
+                <lightning:verticalNavigation selectedItem="{!v.selectedItem}" class="navigation">
                     <lightning:verticalNavigationSection label="Menu">
                         <lightning:verticalNavigationItemIcon
                             label="Search Weather"
@@ -181,6 +178,7 @@
                         </div>
                     </div>
                     <lightning:card class="slds-var-m-top_small">
+                        <!-- Weather History Chart Lightning Component -->
                         <c:weatherChart weatherData="{!v.weatherData}"></c:weatherChart>
                     </lightning:card>
                 </lightning:layoutItem>
