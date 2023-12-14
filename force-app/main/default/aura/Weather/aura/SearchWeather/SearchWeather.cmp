@@ -1,63 +1,190 @@
 <aura:component implements="force:appHostable" controller="SearchWeatherController">
     <!-- Attributes -->
-    <aura:attribute name="location" type="String" />
-    <aura:attribute name="resolvedAddress" type="String" default="No Location Searched!" />
-    <aura:attribute name="currentTemperature" type="String" default="" />
-    <!-- Header -->
-    <div class="slds-page-header slds-page-header_record-home">
-        <div class="slds-page-header__row">
-            <div class="slds-page-header__col-title">
-                <div class="slds-media">
-                    <div class="slds-media__figure">
-                        <span class="slds-icon_container slds-icon-standard-queue">
-                            <lightning:icon
-                                iconName="standard:search"
-                                alternativeText="Search Weather"
-                                class="slds-var-p-around_xx-small"
-                                title="Search Weather"
-                            />
-                        </span>
-                    </div>
-                    <div class="slds-media__body">
-                        <div class="slds-page-header__name">
-                            <div class="slds-page-header__name-title">
-                                <h1>
-                                    <span>Salesforce Weather Application</span>
-                                    <span class="slds-page-header__title slds-truncate">Search Weather</span>
-                                </h1>
+    <aura:attribute name="location" type="String" default="Lucknow, UP, India"/>
+    <aura:attribute name="weatherInformation" type="Object" />
+    <aura:attribute name="selectedItem" type="String" default="searchWeather" />
+    <aura:attribute name="weatherData" type="Object" />
+    <aura:attribute name="columns" type="List" />
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}"></aura:handler>
+
+    <!-- Layout -->
+    <div class="container">
+        <lightning:layout>
+            <lightning:layoutItem>
+                <lightning:verticalNavigation
+                    selectedItem="{!v.selectedItem}"
+                    class="navigation"
+                >
+                    <lightning:verticalNavigationSection label="Menu">
+                        <lightning:verticalNavigationItemIcon
+                            label="Search Weather"
+                            iconName="utility:search"
+                            name="searchWeather"
+                        ></lightning:verticalNavigationItemIcon>
+                        <lightning:verticalNavigationItemIcon
+                            label="Today's Weather Records"
+                            iconName="utility:database"
+                            name="weatherHistoryRecords"
+                        ></lightning:verticalNavigationItemIcon>
+                        <lightning:verticalNavigationItemIcon
+                            label="Today's Weather Graph"
+                            iconName="utility:graph"
+                            name="weatherHistoryGraph"
+                        ></lightning:verticalNavigationItemIcon>
+                    </lightning:verticalNavigationSection>
+                </lightning:verticalNavigation>
+            </lightning:layoutItem>
+            <aura:if isTrue="{!v.selectedItem == 'searchWeather'}">
+                <lightning:layoutItem class="slds-var-m-around_small full-width">
+                    <!-- Header -->
+                    <div class="slds-page-header slds-page-header_record-home">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-utility-search">
+                                            <lightning:icon
+                                                iconName="utility:search"
+                                                alternativeText="Search Weather"
+                                                class="slds-var-p-around_xx-small"
+                                                title="Search Weather"
+                                            />
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div class="slds-page-header__name-title">
+                                                <h2>
+                                                    <span>Salesforce Weather Application</span>
+                                                    <span class="slds-page-header__title slds-truncate"
+                                                        >Search Weather</span
+                                                    >
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <!-- Search Card -->
+                    <lightning:card class="slds-var-m-top_small">
+                        <!-- Search Panel -->
+                        <div class="search-panel slds-var-p-horizontal_medium">
+                            <!-- Location Input Text Box -->
+                            <lightning:input
+                                type="text"
+                                name="location"
+                                variant="label-hidden"
+                                value="{!v.location}"
+                                placeholder="Type Location Name Here..."
+                            />
+                            <!-- Search Button -->
+                            <lightning:button
+                                label="Search Weather"
+                                title="Search Weather"
+                                onclick="{!c.weatherSearchHandler}"
+                                variant="neutral"
+                                class="slds-var-m-left_medium"
+                            />
+                        </div>
+                        <aura:set attribute="title">
+                            <lightning:icon iconName="utility:location" size="small" />
+                            <aura:if isTrue="{!v.weatherInformation != null}">
+                                <span class="slds-var-m-left_small">{!v.weatherInformation.resolvedAddress}</span>
+                                <span class="slds-var-m-left_small">{!v.weatherInformation.currentTemperature} °C</span>
+                            </aura:if>
+                        </aura:set>
+                    </lightning:card>
+                </lightning:layoutItem>
+            </aura:if>
+            <!-- Weather History Records Tab -->
+            <aura:if isTrue="{!v.selectedItem == 'weatherHistoryRecords'}">
+                <lightning:layoutItem class="slds-var-m-around_small">
+                    <!-- Header -->
+                    <div class="slds-page-header slds-page-header_record-home">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-utility-database">
+                                            <lightning:icon
+                                                iconName="utility:database"
+                                                alternativeText="Weather History"
+                                                class="slds-var-p-around_xx-small"
+                                                title="Weather History Records"
+                                            />
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div class="slds-page-header__name-title">
+                                                <h1>
+                                                    <span>Salesforce Weather Application</span>
+                                                    <span class="slds-page-header__title slds-truncate"
+                                                        >Weather History Records (Today)</span
+                                                    >
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <lightning:card class="slds-var-m-top_small">
+                        <div class="table-container">
+                            <lightning:datatable
+                                keyField="id"
+                                data="{!v.weatherData}"
+                                columns="{!v.columns}"
+                                hideCheckboxColumn="true"
+                            />
+                        </div>
+                    </lightning:card>
+                </lightning:layoutItem>
+            </aura:if>
+            <!-- Weather History Graph -->
+            <aura:if isTrue="{!v.selectedItem == 'weatherHistoryGraph'}">
+                <lightning:layoutItem class="slds-var-m-around_small full-width">
+                    <!-- Header -->
+                    <div class="slds-page-header slds-page-header_record-home">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-utility-graph">
+                                            <lightning:icon
+                                                iconName="utility:graph"
+                                                alternativeText="Weather History"
+                                                class="slds-var-p-around_xx-small"
+                                                title="Weather History"
+                                            />
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div class="slds-page-header__name-title">
+                                                <h1>
+                                                    <span>Salesforce Weather Application</span>
+                                                    <span class="slds-page-header__title slds-truncate"
+                                                        >Weather History</span
+                                                    >
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <lightning:card class="slds-var-m-top_small">
+                        <c:weatherChart weatherData="{!v.weatherData}"></c:weatherChart>
+                    </lightning:card>
+                </lightning:layoutItem>
+            </aura:if>
+        </lightning:layout>
     </div>
-    <!-- Search Card -->
-    <lightning:card>
-        <aura:set attribute="title">
-            <lightning:icon iconName="utility:location" size="small" />
-            <span class="slds-var-m-left_small">{!v.resolvedAddress}</span>
-            <span class="slds-var-m-left_small">{!v.currentTemperature}</span>
-        </aura:set>
-        <!-- Search Panel -->
-        <div class="search-panel slds-var-p-horizontal_medium">
-            <!-- Location Input Text Box -->
-            <lightning:input
-                type="text"
-                name="location"
-                label="Location"
-                variant="label-hidden"
-                value="{!v.location}"
-                placeholder="Type Location Name Here..."
-            />
-            <!-- Search Button -->
-            <lightning:button
-                label="Search Weather"
-                title="Search Weather"
-                onclick="{!c.weatherSearchHandler}"
-                variant="neutral"
-                class="slds-var-m-left_medium"
-            />
-        </div>
-    </lightning:card>
 </aura:component>

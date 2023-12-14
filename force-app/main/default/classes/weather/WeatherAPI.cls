@@ -14,17 +14,13 @@ public with sharing class WeatherAPI extends RestAPIController {
     private static final String JSON = 'json';
     
     // Public Queryable Data
-    private static Map<String, String> dataMapping;
-    private static Decimal currentTemperature;
-    private static String resolvedAddress;
+    public Decimal currentTemperature;
+    public String resolvedAddress;
 
     // JSON Input Mapping Keys
     private static final String TEMP = 'temp';
     private static final String CURRENT_CONDITIONS = 'currentConditions';
-
-    // JSON Output Mapping Keys
-    private static final String CURRENT_TEMPERATURE = 'currentTemperature';
-    private static final String RESOLVED_ADDRESS = 'resolvedAddress';
+	private static final String RESOLVED_ADDRESS = 'resolvedAddress';
 
     public WeatherAPI() {
         this.setRequestURL(API_URL)
@@ -32,8 +28,6 @@ public with sharing class WeatherAPI extends RestAPIController {
             .addOrSetRequestURLParam(INCLUDE, CURRENT)
             .addOrSetRequestURLParam(KEY, API_KEY)
             .addOrSetRequestURLParam(CONTENT_TYPE, JSON);
-
-        dataMapping = new Map<String, String>();
     }
 
     public WeatherAPI setLocation(String location) {
@@ -41,7 +35,7 @@ public with sharing class WeatherAPI extends RestAPIController {
         return this;
     }
 
-    public WeatherAPI makeAPIRequest() {
+    public WeatherAPI submitWeatherAPIRequest() {
         this.createHTTPRequest()
             .setMethodGET()
             .setContentJSON()
@@ -50,16 +44,12 @@ public with sharing class WeatherAPI extends RestAPIController {
     }
 
     public WeatherAPI populateData() {
-        Map<String, Object> data = getResponseBodyAsJSON();
-        Map<String, Object> currentConditions = (Map<String, Object>) data.get(CURRENT_CONDITIONS);
-        currentTemperature = (Decimal)currentConditions.get(TEMP);
-        resolvedAddress = (String)data.get(RESOLVED_ADDRESS);
+        if (!hasException() && getStatusCode() == HttpConstants.HTTP_SUCCESS_STATUS_CODE) {
+            Map<String, Object> data = getResponseBodyAsJSON();
+            Map<String, Object> currentConditions = (Map<String, Object>) data.get(CURRENT_CONDITIONS);
+            currentTemperature = (Decimal)currentConditions.get(TEMP);
+            resolvedAddress = (String)data.get(RESOLVED_ADDRESS);
+        }
         return this;
-    }
-
-    public Map<String, String> getDataAsMap() {
-        dataMapping.put(CURRENT_TEMPERATURE, String.valueOf(currentTemperature));
-        dataMapping.put(RESOLVED_ADDRESS, resolvedAddress);
-        return dataMapping;
     }
 }

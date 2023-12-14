@@ -2,3 +2,30 @@
     display: flex;
     justify-content: flex-start;
 }
+
+.THIS .navigation {
+    min-width: 250px;
+    border-right: 1px solid #e7e7e7;
+}
+
+.THIS.container {
+    margin: -12px;
+    width: 100%;
+    background: white;
+    height: 100%;
+    position: fixed;
+}
+
+.THIS .full-width {
+    width: 100%;
+}
+
+.THIS .full-height {
+    height: 100%;
+}
+
+.THIS .table-container {
+    height: 600px;
+    margin-top: -24px;
+    margin-bottom: -12px;
+}

@@ -12,8 +12,7 @@
 
             if (state === 'SUCCESS') {
                 let data = response.getReturnValue();
-                component.set('v.resolvedAddress', data.resolvedAddress);
-                component.set('v.currentTemperature', data.currentTemperature + ' °C');
+                component.set('v.weatherInformation', data);
             } else {
                 this.showToast('Error', 'Failed to search weather for this location!', 'error');
             }
@@ -32,6 +31,24 @@
         });
 
         toastEvent.fire();
+    },
+
+    'fetchWeatherHistory': function(component) {
+        const action = component.get('c.getAllWeatherHistoryByLocationForToday');
+        action.setParams({
+            'location': 'Lucknow, UP, India'
+        });
+
+        action.setCallback(this, (response) => {
+            const state = response.getState();
+            if (state === 'SUCCESS') {
+                let data = response.getReturnValue();
+                component.set('v.weatherData', data);
+            } else {
+                this.showToast('Error', 'Failed to fetch weather history!', 'error');
+            }
+        });
+
+        $A.enqueueAction(action);
     }
 });
-
