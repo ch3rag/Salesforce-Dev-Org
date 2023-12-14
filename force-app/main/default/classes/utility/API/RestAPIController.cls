@@ -5,6 +5,7 @@ public with sharing abstract class RestAPIController {
     private HttpResponse httpResponse;
     private Map<String, String> requestParams;
     private String argAfterURLBeforeParams;
+    private Boolean hasException;
 
     private static final String FORWARD_SLASH = '/';
     private static final String QUESTION_MARK = '?';
@@ -14,6 +15,7 @@ public with sharing abstract class RestAPIController {
     protected RestAPIController () {
         argAfterURLBeforeParams = '';
         requestParams = new Map<String, String>();
+        hasException = false;
     }
 
     protected RestAPIController setRequestURL(String url) {
@@ -51,8 +53,10 @@ public with sharing abstract class RestAPIController {
         Http http = new Http();
         try {
             httpResponse = http.send(httpRequest);
+            hasException = false;
         } catch (System.CalloutException exp) {
             throw exp;
+            // hasException = true;
         }
     }
 
@@ -86,5 +90,9 @@ public with sharing abstract class RestAPIController {
 
     public Map<String, Object> getResponseBodyAsJSON() {
         return (Map<String, Object>) JSON.deserializeUntyped(httpResponse.getBody());
+    }
+
+    public Boolean hasException() {
+        return hasException;
     }
 }
