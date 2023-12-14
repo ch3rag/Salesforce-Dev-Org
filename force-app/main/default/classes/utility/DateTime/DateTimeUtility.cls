@@ -4,6 +4,7 @@ public with sharing class DateTimeUtility {
     private static final Integer FIFTY_NINE = 59;
     private static final Integer NINE_HUNDRED_NINETY_NINE = 999;
     private static final String FORMAT = 'yyyy-MM-dd\'T\'HH:mm:ssZ';
+
     public static Time getTimeEOD() {
         return Time.newInstance(ELEVEN, FIFTY_NINE, FIFTY_NINE, NINE_HUNDRED_NINETY_NINE);
     }
