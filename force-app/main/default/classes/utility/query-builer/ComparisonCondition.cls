@@ -4,12 +4,16 @@ public with sharing class ComparisonCondition {
     private String value;
     private Boolean isValueString;
 
-
     public ComparisonCondition(String fieldName, String operator, String value) {
         this.fieldName = fieldName;
         this.operator = operator;
         this.value = value;
-        this.isValueString = true;
+
+        if (value != QueryConstants.NULL_KEYWORD) {
+            this.isValueString = true;
+        } else {
+            this.isValueString = false;
+        }
     }
 
     public ComparisonCondition(String fieldName, String operator, Integer value) {
@@ -34,7 +38,6 @@ public with sharing class ComparisonCondition {
         } else {
             finalCondition += value;
         }
-
         return finalCondition;
     }
 }

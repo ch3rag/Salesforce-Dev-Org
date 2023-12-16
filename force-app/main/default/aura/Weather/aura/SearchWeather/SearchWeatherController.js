@@ -8,7 +8,7 @@
             { label: 'Name', fieldName: 'Name', type: 'text' },
             { label: 'Location Name', fieldName: 'Location__c', type: 'text' },
             { label: 'Temperature °C', fieldName: 'Temperature__c', type: 'number' },
-            { label: 'Timestamp', fieldName: 'Timestamp__c', type: 'date',
+            { label: 'Created Date', fieldName: 'CreatedDate', type: 'date',
                 typeAttributes: {
                     day: '2-digit',
                     month: 'short',

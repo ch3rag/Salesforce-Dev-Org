@@ -6,7 +6,6 @@ public with sharing class WeatherAPIFutureCaller {
         Weather_History__c history = new Weather_History__c();
         history.Location__c = api.resolvedAddress;
         history.Temperature__c = api.currentTemperature;
-        history.Timestamp__c = DateTime.now();
         WeatherHistoryRepository.insertWeatherHistory(history);
     }
 }

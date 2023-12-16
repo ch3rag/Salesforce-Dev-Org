@@ -64,7 +64,7 @@ export default class WeatherChart extends LightningElement {
 
                 for (let i = this.weatherData.length - 1; i >= 0; i--) {
                     this.chartConfiguration.data.datasets[0].data.push({
-                        x: this.weatherData[i].Timestamp__c,
+                        x: this.weatherData[i].CreatedDate,
                         y: this.weatherData[i].Temperature__c
                     });
                 }
