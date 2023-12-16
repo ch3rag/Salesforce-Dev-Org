@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Data_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Data Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MIN_TEMPERATURE</fullName>
+                <default>false</default>
+                <label>Minimum Temperature</label>
+            </value>
+            <value>
+                <fullName>MAX_TEMPERATURE</fullName>
+                <default>false</default>
+                <label>Maximum Temperature</label>
+            </value>
+            <value>
+                <fullName>AVG_TEMPERATURE</fullName>
+                <default>false</default>
+                <label>Average Temperature</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
