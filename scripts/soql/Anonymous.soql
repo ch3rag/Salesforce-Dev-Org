@@ -1,1 +1,1 @@
-SELECT FIELDS(ALL) FROM CronTrigger LIMIT 5
+SELECT Id FROM Weather_History__c WHERE Location__c = 'Lucknow, UP, India' AND Timestamp__c = 2023-12-13
