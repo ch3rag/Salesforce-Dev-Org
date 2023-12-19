@@ -50,5 +50,24 @@
         });
 
         $A.enqueueAction(action);
+    },
+
+    'fetchWeatherMinMaxAvgHistory': function(component) {
+        const action = component.get('c.getMinMaxAvgWeatherHistoryByLocationForCurrentYear');
+        action.setParams({
+            'location': 'Lucknow, UP, India'
+        });
+
+        action.setCallback(this, (response) => {
+            const state = response.getState();
+            if (state === 'SUCCESS') {
+                let data = response.getReturnValue();
+                component.set('v.weatherMinMaxAvgData', data);
+            } else {
+                this.showToast('Error', 'Failed to fetch weather history!', 'error');
+            }
+        });
+
+        $A.enqueueAction(action);
     }
 });

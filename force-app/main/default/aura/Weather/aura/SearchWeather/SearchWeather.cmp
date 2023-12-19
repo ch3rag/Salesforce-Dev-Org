@@ -4,6 +4,7 @@
     <aura:attribute name="weatherInformation" type="Object" />
     <aura:attribute name="selectedItem" type="String" default="searchWeather" />
     <aura:attribute name="weatherData" type="Object" />
+    <aura:attribute name="weatherMinMaxAvgData" type="Object" />
     <aura:attribute name="columns" type="List" />
 
     <!-- Handlers -->
@@ -29,6 +30,11 @@
                             label="Today's Weather Graph"
                             iconName="utility:graph"
                             name="weatherHistoryGraph"
+                        ></lightning:verticalNavigationItemIcon>
+                        <lightning:verticalNavigationItemIcon
+                            label="Yearly Weather History"
+                            iconName="utility:trending"
+                            name="yearlyWeatherHistory"
                         ></lightning:verticalNavigationItemIcon>
                     </lightning:verticalNavigationSection>
                 </lightning:verticalNavigation>
@@ -180,6 +186,46 @@
                     <lightning:card class="slds-var-m-top_small">
                         <!-- Weather History Chart Lightning Component -->
                         <c:weatherChart weatherData="{!v.weatherData}"></c:weatherChart>
+                    </lightning:card>
+                </lightning:layoutItem>
+            </aura:if>
+            <!-- Yearly Weather History Graph -->
+            <aura:if isTrue="{!v.selectedItem == 'yearlyWeatherHistory'}">
+                <lightning:layoutItem class="slds-var-m-around_small full-width">
+                    <!-- Header -->
+                    <div class="slds-page-header slds-page-header_record-home">
+                        <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-utility-trending">
+                                            <lightning:icon
+                                                iconName="utility:trending"
+                                                alternativeText="Yearly Weather History"
+                                                class="slds-var-p-around_xx-small"
+                                                title="Yearly Weather History"
+                                            />
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div class="slds-page-header__name-title">
+                                                <h1>
+                                                    <span>Salesforce Weather Application</span>
+                                                    <span class="slds-page-header__title slds-truncate"
+                                                        >Yearly Weather History</span
+                                                    >
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <lightning:card class="slds-var-m-top_small">
+                        <!-- Weather Yearly History Chart Lightning Component -->
+                        <c:weatherMinMaxAvgGraph weatherData="{!v.weatherMinMaxAvgData}"></c:weatherMinMaxAvgGraph>
                     </lightning:card>
                 </lightning:layoutItem>
             </aura:if>

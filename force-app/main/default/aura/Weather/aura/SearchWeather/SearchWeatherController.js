@@ -23,5 +23,6 @@
 
         helper.searchWeather(component);
         helper.fetchWeatherHistory(component);
+        helper.fetchWeatherMinMaxAvgHistory(component);
     }
 });

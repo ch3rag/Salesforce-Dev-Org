@@ -92,6 +92,22 @@ public with sharing class WeatherHistoryRepository {
         return getMinMaxTemperatureByLocationForDate(location, dateValue, new OrderField(TEMPERATURE_FIELD).sortAscending());
     }
 
+    public static List<Weather_History__c> getMinMaxAvgWeatherHistoryByLocationForCurrentYear(String location) {
+        AndLogicalCondition condition = new AndLogicalCondition();
+        condition.addComparisonCondition(new ComparisonCondition(LOCATION_FIELD, ComparisonOperators.EQUALS, location));
+        condition.addComparisonCondition(new ComparisonCondition(QueryConstants.CREATED_DATE_FIELD, ComparisonOperators.LESS_THAN, QueryConstants.DateConstants.TODAY));
+        condition.addComparisonCondition(new ComparisonCondition(QueryConstants.CREATED_DATE_FIELD, ComparisonOperators.EQUALS, QueryConstants.DateConstants.THISYEAR));
+        condition.addComparisonCondition(new ComparisonCondition(DATA_TYPE_FIELD, ComparisonOperators.NOT_EQUALS, QueryConstants.NULL_KEYWORD));
+
+        List<Weather_History__c> records = query(FIELDS_TO_QUERY, condition, new OrderField(QueryConstants.CREATED_DATE_FIELD).sortDescending(), QueryConstants.NO_LIMIT);
+
+        if (records.size() > 0) {
+            return records;
+        }
+
+        return null;
+    }
+
     private static List<Weather_History__c> query(List<String> fields, LogicalCondition condition, OrderField orderField, Integer limitValue) {
         QueryBuilder queryBuilder = new QueryBuilder()
             .selectAllFields(fields)

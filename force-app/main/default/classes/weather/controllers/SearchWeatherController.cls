@@ -32,4 +32,9 @@ public with sharing class SearchWeatherController {
         @AuraEnabled
         public Decimal currentTemperature;
     }
+
+    @AuraEnabled
+    public static List<Weather_History__c> getMinMaxAvgWeatherHistoryByLocationForCurrentYear(String location) {
+        return WeatherHistoryRepository.getMinMaxAvgWeatherHistoryByLocationForCurrentYear(location);
+    }
 }

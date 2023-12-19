@@ -15,7 +15,8 @@ public with sharing class QueryConstants {
 
     public enum DateConstants {
         TODAY,
-        YESTERDAY
+        YESTERDAY,
+        THISYEAR
     }
 
     public enum AggregateOperators {
